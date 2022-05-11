@@ -34,6 +34,7 @@ export class App {
 
     routes() {
         this.routePrv.UsuarioRoutes.routes(this.app)
+        this.routePrv.ventaRoutes.routes(this.app)
     }
 
 }

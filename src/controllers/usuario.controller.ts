@@ -14,11 +14,44 @@ export class UsuarioController {
     }
 
     public async getOneUsuario(req: Request,  res: Response){
-        
+        const {id: idParam} = req.params
+
+        try {
+            const user: UsuarioI | null = await Usuario.findOne(
+                {
+                    where: {id: idParam}
+                }
+            )
+
+            res.status(200).json(user)
+        } catch (Error){
+            res.status(500).json({msg:"Error internal"});
+
+        }
     }
 
     public async createUsuario(req: Request,  res: Response){
-        
+        const {
+            id,
+            nombre,
+            correo,
+            telefono,
+            direccion
+        } = req.body;
+
+        try {
+            let body:any = {
+                
+                nombre,
+                correo,
+                telefono,
+                direccion
+            }
+            const user = await Usuario.create(body);
+            res.status(200).json({user});
+        } catch (error){
+
+        }
     }
 
     public async updateUsuario(req: Request,  res: Response){
